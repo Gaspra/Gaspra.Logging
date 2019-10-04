@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{13A14800-622E-4880-9828-9BDC4CB18691}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Providers.Fluentd", "Providers\Gaspra.Logging.Providers.Fluentd\Gaspra.Logging.Providers.Fluentd.csproj", "{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Serializer", "Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj", "{26968640-FCC2-4EB5-B374-F2F987151DC9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Hosting", "Gaspra.Logging.Hosting\Gaspra.Logging.Hosting.csproj", "{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.ApplicationInformation", "Gaspra.Logging.ApplicationInformation\Gaspra.Logging.ApplicationInformation.csproj", "{33C89BA6-6323-419B-90BB-3CBF22B0DE08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21} = {13A14800-622E-4880-9828-9BDC4CB18691}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B948C79-B979-4C33-B4EC-10226A1969CF}
+	EndGlobalSection
+EndGlobal
