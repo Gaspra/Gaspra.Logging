@@ -8,7 +8,7 @@ namespace Gaspra.Logging.Providers.Fluentd
 {
     public class Options : IOptions
     {
-        private static string FluentdSectionName => "Logging:Fluentd";
+        private static string FluentdSectionName => "Logging:Providers:Fluentd";
 
         public Options(IConfiguration configuration)
         {

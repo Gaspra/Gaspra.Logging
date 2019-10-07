@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Hosting", "G
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.ApplicationInformation", "Gaspra.Logging.ApplicationInformation\Gaspra.Logging.ApplicationInformation.csproj", "{33C89BA6-6323-419B-90BB-3CBF22B0DE08}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{06A98B21-0F4B-41A0-8B7A-2F19E2990643}"
+	ProjectSection(SolutionItems) = preProject
+		..\package.bat = ..\package.bat
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

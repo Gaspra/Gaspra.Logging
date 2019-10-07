@@ -1,5 +1,8 @@
 ﻿using Gaspra.Logging.Providers.Fluentd.Interfaces;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Concurrent;
 
 namespace Gaspra.Logging.Providers.Fluentd
 {

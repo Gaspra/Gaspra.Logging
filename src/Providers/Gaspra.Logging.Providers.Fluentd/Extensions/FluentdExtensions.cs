@@ -13,7 +13,6 @@ namespace Gaspra.Logging.Providers.Fluentd.Extensions
         {
             return builder.AddFluentd(builder.Services);
         }
-        }
 
         public static ILoggingBuilder AddFluentd(
             this ILoggingBuilder builder,
