@@ -1,11 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <SignAssembly>false</SignAssembly>
+    <Version>0.1.0</Version>
+    <Authors>Richard Lawrence</Authors>
+    <Company>Gaspra</Company>
+    <AssemblyOriginatorKeyFile>Gaspra.Logging.pfx</AssemblyOriginatorKeyFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <DelaySign>false</DelaySign>
+    <Description>Gaspra.Logging package has been designed and created to easily allow you more control over your logging. Providing
+the ability to use the dotnet core logging framework and control how logs and their relevant information are serialized.</Description>
+    <PackageProjectUrl>https://github.com/Gaspra/Gaspra.Logging</PackageProjectUrl>
+    <PackageReleaseNotes>Initial release with Fluentd provider and default set up</PackageReleaseNotes>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 

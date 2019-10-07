@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Gaspra.Logging.Providers.Fluentd.Extensions;
+using Gaspra.Logging.Serializer.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
@@ -20,13 +22,14 @@ namespace Gaspra.Logging.Hosting
 
         public static IHostBuilder AddDefaultFluentd(this IHostBuilder hostBuilder)
         {
-            hostBuilder.ConfigureLogging((loggingBuilder) =>
-            {
-                loggingBuilder
-                    .AddDefaultFluentd();
-            });
+            hostBuilder
+                .ConfigureLogging((loggingBuilder) =>
+                {
+                    loggingBuilder
+                        .AddDefaultFluentd();
+                });
 
-            return webHostBuilder;
+            return hostBuilder;
         }
 
         public static ILoggingBuilder AddDefaultFluentd(this ILoggingBuilder loggingBuilder)

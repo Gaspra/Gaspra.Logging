@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Gaspra.Logging.ApplicationInformation.Extensions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gaspra.Logging.ApplicationInformation
 {
@@ -35,13 +34,13 @@ namespace Gaspra.Logging.ApplicationInformation
                 configuration, populate using the environment and hosting environment
             */
             if (!information.ContainsKey("environment"))
-                information.Add("environment", PropertyRetriever.GetEnvironment(hostingEnvironment));
+                information.Add("environment", PropertyRetrieverExtensions.GetEnvironment(hostingEnvironment));
 
             if (!information.ContainsKey("machine"))
-                information.Add("machine", PropertyRetriever.GetMachineName());
+                information.Add("machine", PropertyRetrieverExtensions.GetMachineName());
 
             if (!information.ContainsKey("instance"))
-                information.Add("instance", PropertyRetriever.GetInstance(hostingEnvironment));
+                information.Add("instance", PropertyRetrieverExtensions.GetInstance(hostingEnvironment));
 
             Information = information;
         }

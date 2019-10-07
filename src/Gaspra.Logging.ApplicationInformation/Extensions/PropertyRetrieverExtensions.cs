@@ -10,12 +10,12 @@ namespace Gaspra.Logging.ApplicationInformation.Extensions
             return Environment.MachineName;
         }
 
-        public static string GetEnvironment(IHostingEnvironment hosting)
+        public static string GetEnvironment(this IHostingEnvironment hosting)
         {
             return hosting.EnvironmentName.ToUpper();
         }
 
-        public static string GetInstance(IHostingEnvironment hosting)
+        public static string GetInstance(this IHostingEnvironment hosting)
         {
             return hosting.ApplicationName;
         }

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace Gaspra.Logging.Serializer.Extensions
 {
@@ -101,14 +100,10 @@ namespace Gaspra.Logging.Serializer.Extensions
             return providers;
         }
 
-        /*
-            todo;
-                this has been moved from an individual project, make sure it's cleaned up properly
-        */
         public static IServiceCollection AddDefaultSerializer(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             services
-                .AddSerializers(new Type[] { typeof(DefaultSerializer) })
+                .AddSerializers(new Type[] { typeof(DefaultSerializer) }, lifetime)
                 .AddApplicationInformation();
 
             return services;
