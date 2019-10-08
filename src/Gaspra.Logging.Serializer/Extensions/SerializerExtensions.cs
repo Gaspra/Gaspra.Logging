@@ -1,5 +1,4 @@
-﻿using Gaspra.Logging.ApplicationInformation.Extensions;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +11,10 @@ namespace Gaspra.Logging.Serializer.Extensions
         /*
             Add serializer extensions
         */
-        public static IServiceCollection AddSerializersFromAssemblies(this IServiceCollection services, IEnumerable<Assembly> assemblies, ServiceLifetime lifetime = ServiceLifetime.Transient)
+        public static IServiceCollection AddSerializersFromAssemblies(
+            this IServiceCollection services,
+            IEnumerable<Assembly> assemblies,
+            ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             var typesFromAssemblies = assemblies
                 .SelectMany(a => a
@@ -33,7 +35,10 @@ namespace Gaspra.Logging.Serializer.Extensions
             return services;
         }
 
-        public static IServiceCollection AddSerializers(this IServiceCollection services, IEnumerable<Type> serializers, ServiceLifetime lifetime = ServiceLifetime.Transient)
+        public static IServiceCollection AddSerializers(
+            this IServiceCollection services,
+            IEnumerable<Type> serializers,
+            ServiceLifetime lifetime = ServiceLifetime.Transient)
         {
             foreach (var serializer in serializers)
             {
@@ -54,26 +59,32 @@ namespace Gaspra.Logging.Serializer.Extensions
         /*
             Get serializer extensions
         */
-        public static IEnumerable<ILogSerializer> GetSerializers(this IServiceCollection collection)
+        public static IEnumerable<ILogSerializer> GetSerializers(
+            this IServiceCollection collection)
         {
             var provider = collection.BuildServiceProvider();
 
             return provider.GetSerializers();
         }
 
-        public static IEnumerable<ILogSerializer> GetSerializers(this IServiceProvider provider)
+        public static IEnumerable<ILogSerializer> GetSerializers(
+            this IServiceProvider provider)
         {
             return provider.GetSerializers(p => nameof(p));
         }
 
-        public static IEnumerable<ILogSerializer> GetSerializers<TKey>(this IServiceCollection collection, Func<ILogSerializer, TKey> keySelector)
+        public static IEnumerable<ILogSerializer> GetSerializers<TKey>(
+            this IServiceCollection collection,
+            Func<ILogSerializer, TKey> keySelector)
         {
             var provider = collection.BuildServiceProvider();
 
             return provider.GetSerializers(keySelector);
         }
 
-        public static IEnumerable<ILogSerializer> GetSerializers<TKey>(this IServiceProvider provider, Func<ILogSerializer, TKey> keySelector)
+        public static IEnumerable<ILogSerializer> GetSerializers<TKey>(
+            this IServiceProvider provider,
+            Func<ILogSerializer, TKey> keySelector)
         {
             var providers = provider
                 .GetServices<ILogSerializer>()
@@ -83,14 +94,18 @@ namespace Gaspra.Logging.Serializer.Extensions
             return providers;
         }
 
-        public static IEnumerable<ILogSerializer> GetSerializersDescending<TKey>(this IServiceCollection collection, Func<ILogSerializer, TKey> keySelector)
+        public static IEnumerable<ILogSerializer> GetSerializersDescending<TKey>(
+            this IServiceCollection collection,
+            Func<ILogSerializer, TKey> keySelector)
         {
             var provider = collection.BuildServiceProvider();
 
             return provider.GetSerializersDescending(keySelector);
         }
 
-        public static IEnumerable<ILogSerializer> GetSerializersDescending<TKey>(this IServiceProvider provider, Func<ILogSerializer, TKey> keySelector)
+        public static IEnumerable<ILogSerializer> GetSerializersDescending<TKey>(
+            this IServiceProvider provider,
+            Func<ILogSerializer, TKey> keySelector)
         {
             var providers = provider
                 .GetServices<ILogSerializer>()
@@ -99,15 +114,5 @@ namespace Gaspra.Logging.Serializer.Extensions
 
             return providers;
         }
-
-        public static IServiceCollection AddDefaultSerializer(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Transient)
-        {
-            services
-                .AddSerializers(new Type[] { typeof(DefaultSerializer) }, lifetime)
-                .AddApplicationInformation();
-
-            return services;
-        }
     }
-
 }

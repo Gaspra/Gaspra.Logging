@@ -1,5 +1,4 @@
-﻿using Gaspra.Logging.ApplicationInformation;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,27 +8,15 @@ namespace Gaspra.Logging.Serializer
     public class DefaultSerializer : ILogSerializer
     {
         private JsonSerializerSettings SerializerSettings { get; }
+        private IDictionary<string, string> Properties { get; set; } = null;
 
-        private string Tag { get; set; }
-        private IDictionary<string, string> Properties { get; set; }
-
-        public DefaultSerializer(IApplicationInformation appInfo)
+        public DefaultSerializer(ILogProperties logProperties)
         {
-            /*
-                Properties are not expected to change after serializer is
-                instantiated. This model doesn't fit for multitenanted
-                services which might serve multiple clients from a single
-                instance.
-            */
-            Properties = appInfo.Information;
+            if (logProperties != null)
+            {
+                Properties = logProperties.Properties;
+            }
 
-            Tag = TryBuildTag(appInfo);
-
-            /*
-                To make the default serialization as safe as possible it'll
-                ignore self referencing loops (HttpContext is a big offender
-                of this)
-            */
             SerializerSettings = new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -76,9 +63,15 @@ namespace Gaspra.Logging.Serializer
             {
                 { $"@{nameof(timestamp).ToLower()}", timestamp.ToString("O") },
                 { nameof(Detail).ToLower(), Detail },
-                { nameof(Properties).ToLower(), Properties },
-                { nameof(Tag).ToLower(), Tag }
+
             };
+
+            if(Properties != null)
+            {
+                logDictionary.Add(
+                    nameof(Properties).ToLower(), Properties
+                );
+            }
 
             return (logDictionary, timestamp);
         }
@@ -105,27 +98,6 @@ namespace Gaspra.Logging.Serializer
 
             }
             return "";
-        }
-
-        private string TryBuildTag(IApplicationInformation appInfo)
-        {
-            var tagList = new List<string>();
-
-            if (appInfo.Information.TryGetValue("environment", out var environment))
-                tagList.Add(environment);
-
-            if (appInfo.Information.TryGetValue("system", out var system))
-                tagList.Add(system);
-
-            if (appInfo.Information.TryGetValue("client", out var client))
-                tagList.Add(client);
-
-            if (appInfo.Information.TryGetValue("instance", out var instance))
-                tagList.Add(instance);
-
-            var tag = string.Join(".", tagList).ToUpper();
-
-            return tag;
         }
     }
 }

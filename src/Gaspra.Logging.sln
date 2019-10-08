@@ -9,15 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Providers.Fl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Serializer", "Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj", "{26968640-FCC2-4EB5-B374-F2F987151DC9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Hosting", "Gaspra.Logging.Hosting\Gaspra.Logging.Hosting.csproj", "{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.ApplicationInformation", "Gaspra.Logging.ApplicationInformation\Gaspra.Logging.ApplicationInformation.csproj", "{33C89BA6-6323-419B-90BB-3CBF22B0DE08}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{06A98B21-0F4B-41A0-8B7A-2F19E2990643}"
 	ProjectSection(SolutionItems) = preProject
-		..\package.bat = ..\package.bat
+		..\pack.bat = ..\pack.bat
 		..\readme.md = ..\readme.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Builder", "Gaspra.Logging.Builder\Gaspra.Logging.Builder.csproj", "{DB5EADB4-87CE-4EE1-B43C-B1C1CC90F4CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +31,10 @@ Global
 		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26968640-FCC2-4EB5-B374-F2F987151DC9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1EC5D3B7-391F-4FB4-AE74-3907A36A33B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33C89BA6-6323-419B-90BB-3CBF22B0DE08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5EADB4-87CE-4EE1-B43C-B1C1CC90F4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5EADB4-87CE-4EE1-B43C-B1C1CC90F4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5EADB4-87CE-4EE1-B43C-B1C1CC90F4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5EADB4-87CE-4EE1-B43C-B1C1CC90F4CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

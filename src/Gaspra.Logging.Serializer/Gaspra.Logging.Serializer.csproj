@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <SignAssembly>false</SignAssembly>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Richard Lawrence</Authors>
     <Company>Gaspra</Company>
     <AssemblyOriginatorKeyFile>Gaspra.Logging.pfx</AssemblyOriginatorKeyFile>
@@ -19,12 +19,10 @@ the ability to use the dotnet core logging framework and control how logs and th
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Gaspra.Logging.ApplicationInformation\Gaspra.Logging.ApplicationInformation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
-﻿using Gaspra.Logging.Hosting;
+﻿using Gaspra.Logging.Builder;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
-using FifteenBelow.Logging.Sample.Default;
 
 namespace Gaspra.Logging.Sample.Default
 {
@@ -19,7 +18,7 @@ namespace Gaspra.Logging.Sample.Default
                 {
                     logging
                         .ClearProviders()
-                        .AddDefaultFluentd();
+                        .AddProviderFluentdWithDefaults();
                 })
                 .UseStartup<Startup>();
     }
