@@ -15,9 +15,18 @@ the ability to use the dotnet core logging framework and control how logs and th
     <PackageReleaseNotes>Initial release with Fluentd provider and default set up</PackageReleaseNotes>
     <NeutralLanguage>en-GB</NeutralLanguage>
     <FileVersion>0.1.1.0</FileVersion>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj" />
-    <ProjectReference Include="..\Providers\Gaspra.Logging.Providers.Fluentd\Gaspra.Logging.Providers.Fluentd.csproj" />
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.Fluentd\Gaspra.Logging.Provider.Fluentd.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+  <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

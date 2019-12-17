@@ -1,5 +1,5 @@
-﻿using Gaspra.Logging.Providers.Fluentd;
-using Gaspra.Logging.Providers.Fluentd.Extensions;
+﻿using Gaspra.Logging.Provider.Fluentd;
+using Gaspra.Logging.Provider.Fluentd.Extensions;
 using Gaspra.Logging.Serializer;
 using Gaspra.Logging.Serializer.Extensions;
 using Microsoft.Extensions.DependencyInjection;

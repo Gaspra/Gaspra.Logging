@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>0.1.1</Version>
+    <Authors>Richard Lawrence</Authors>
+    <Company>Gaspra</Company>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>Gaspra.Logging.pfx</AssemblyOriginatorKeyFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>Gaspra.Logging package has been designed and created to easily allow you more control over your logging. Providing
+the ability to use the dotnet core logging framework and control how logs and their relevant information are serialized.</Description>
+    <PackageProjectUrl>https://github.com/Gaspra/Gaspra.Logging</PackageProjectUrl>
+    <RepositoryUrl>
+    </RepositoryUrl>
+    <PackageReleaseNotes>Initial release with Fluentd provider and default set up</PackageReleaseNotes>
+    <NeutralLanguage>en-GB</NeutralLanguage>
+    <AssemblyVersion>0.1.1.0</AssemblyVersion>
+    <FileVersion>0.1.1.0</FileVersion>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl />
+    <PackageId>Gaspra.Logging.Provider.Fluentd</PackageId>
+    <Product>Gaspra.Logging.Provider.Fluentd</Product>
+    <AssemblyName>Gaspra.Logging.Provider.Fluentd</AssemblyName>
+    <RootNamespace>Gaspra.Logging.Provider.Fluentd</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gaspra.Logging.Provider\Gaspra.Logging.Provider.csproj" />
+    <ProjectReference Include="..\..\Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\icon.png">
+      <Pack>True</Pack>
+      <PackagePath>
+      </PackagePath>
+    </None>
+  </ItemGroup>
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+</Project>
