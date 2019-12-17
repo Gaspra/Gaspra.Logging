@@ -1,0 +1,4 @@
+Microsoft.Extensions.Configuration
+Microsoft.Extensions.DependencyInjection
+Microsoft.Extensions.Hosting
+Newtonsoft.Json

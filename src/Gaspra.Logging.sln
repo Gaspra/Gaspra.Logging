@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{0CEEE2C0-91E5-4C18-9FDF-36E61D629393}"
+	ProjectSection(SolutionItems) = preProject
+		..\paket.dependencies = ..\paket.dependencies
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{13A14800-622E-4880-9828-9BDC4CB18691}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Providers.Fluentd", "Providers\Gaspra.Logging.Providers.Fluentd\Gaspra.Logging.Providers.Fluentd.csproj", "{5DE2486C-830C-44EE-ABE0-7F4ED48EDD21}"
@@ -11,7 +16,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gaspra.Logging.Serializer",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{06A98B21-0F4B-41A0-8B7A-2F19E2990643}"
 	ProjectSection(SolutionItems) = preProject
-		..\pack.bat = ..\pack.bat
 		..\readme.md = ..\readme.md
 	EndProjectSection
 EndProject
