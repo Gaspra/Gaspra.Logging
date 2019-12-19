@@ -8,10 +8,11 @@ using System.IO;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class LogPacker : ILogPacker
+    public class LogPacker : ProviderPacker
     {
         private TcpClient tcpClient;
         private readonly SerializationContext serializationContext;

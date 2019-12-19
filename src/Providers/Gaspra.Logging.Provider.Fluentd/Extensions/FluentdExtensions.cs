@@ -50,10 +50,10 @@ namespace Gaspra.Logging.Provider.Fluentd.Extensions
                 .TryAddSingleton<ProviderClient, Client>();
 
             serviceCollection
-                .TryAddTransient<IFluentdLogger, FluentdLogger>();
+                .TryAddTransient<ProviderLogger, FluentdLogger>();
 
             serviceCollection
-                .TryAddTransient<ILogPacker, LogPacker>();
+                .TryAddTransient<ProviderPacker, LogPacker>();
 
             serviceCollection
                 .TryAddTransient<IClientTimer, ClientTimer>();

@@ -1,5 +1,12 @@
 # Project Name to build and pack
-$Projects = @("Gaspra.Logging.Serializer", "Gaspra.Logging.Builder", "Gaspra.Logging.Provider", "Gaspra.Logging.Provider.Fluentd")
+$Projects = @(
+    "Gaspra.Logging.Serializer",
+    "Gaspra.Logging.Builder",
+    "Gaspra.Logging.Provider",
+    "Gaspra.Logging.Provider.Fluentd",
+    "Gaspra.Logging.Provider.Console",
+    "Gaspra.Logging.Provider.File"
+    )
 $Version = "1.0.0-local"
 
 #Restore paket

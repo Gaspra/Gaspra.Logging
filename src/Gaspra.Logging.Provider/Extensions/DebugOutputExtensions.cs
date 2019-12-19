@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Gaspra.Logging.Provider.Fluentd.Extensions
+namespace Gaspra.Logging.Provider.Extensions
 {
     public static class DebugOutputExtensions
     {

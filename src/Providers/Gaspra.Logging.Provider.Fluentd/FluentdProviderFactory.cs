@@ -9,12 +9,12 @@ namespace Gaspra.Logging.Provider.Fluentd
     public class FluentdProviderFactory : ProviderFactory
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly ConcurrentDictionary<string, IFluentdLogger> loggers;
+        private readonly ConcurrentDictionary<string, ProviderLogger> loggers;
 
         public FluentdProviderFactory(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            loggers = new ConcurrentDictionary<string, IFluentdLogger>();
+            loggers = new ConcurrentDictionary<string, ProviderLogger>();
         }
 
         /*
@@ -29,9 +29,10 @@ namespace Gaspra.Logging.Provider.Fluentd
             return logger;
         }
 
-        private IFluentdLogger GetLoggerService(string name)
+        private ProviderLogger GetLoggerService(string name)
         {
-            var logger = serviceProvider.GetService<IFluentdLogger>();
+            var logger = (ProviderLogger)serviceProvider
+                .GetRequiredService(typeof(FluentdLogger));
 
             logger.Name = name;
 

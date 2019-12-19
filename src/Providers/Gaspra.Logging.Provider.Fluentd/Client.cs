@@ -6,12 +6,13 @@ using System.Linq;
 using System.Threading;
 using Gaspra.Logging.Provider.Fluentd.Interfaces;
 using Gaspra.Logging.Provider.Fluentd.Models;
+using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
     public class Client : ProviderClient
     {
-        private readonly ILogPacker packer;
+        private readonly ProviderPacker packer;
         private readonly IOptions options;
         private readonly IClientTimer timer;
         private readonly object syncObj;
@@ -21,7 +22,7 @@ namespace Gaspra.Logging.Provider.Fluentd
         private bool connected = false;
 
         public Client(
-            ILogPacker packer,
+            ProviderPacker packer,
             IOptions options,
             IClientTimer timer)
         {

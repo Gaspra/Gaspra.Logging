@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\..\Gaspra.Logging.Provider\Gaspra.Logging.Provider.csproj" />
+    <ProjectReference Include="..\..\Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj" />
+  </ItemGroup>
 </Project>

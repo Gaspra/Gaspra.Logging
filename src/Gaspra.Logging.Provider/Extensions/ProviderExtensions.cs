@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Gaspra.Logging.Provider.Fluentd.Extensions
+namespace Gaspra.Logging.Provider.Extensions
 {
-    public static class SerializerChecker
+    public static class ProviderExtensions
     {
         /*
             Get the first serializer appropriate to the log level, state and exception.

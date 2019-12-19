@@ -4,10 +4,11 @@ using Gaspra.Logging.Serializer;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdLogger : IFluentdLogger
+    public class FluentdLogger : ProviderLogger
     {
         private readonly IEnumerable<ILogSerializer> serializers;
         private readonly ProviderClient client;

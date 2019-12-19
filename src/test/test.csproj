@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.Console\Gaspra.Logging.Provider.Console.csproj" />
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.File\Gaspra.Logging.Provider.File.csproj" />
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.Fluentd\Gaspra.Logging.Provider.Fluentd.csproj" />
+  </ItemGroup>
+
+
+
+</Project>
