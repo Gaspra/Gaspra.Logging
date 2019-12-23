@@ -16,12 +16,12 @@ namespace Gaspra.Logging.Provider.Console.Extensions
 
         public static ILoggingBuilder AddConsoleLogger(
             this ILoggingBuilder builder,
-            ConsoleOptions fluentdOptions)
+            ConsoleOptions consoleOptions)
         {
-            if (fluentdOptions == null) throw new ArgumentNullException(nameof(fluentdOptions));
+            if (consoleOptions == null) throw new ArgumentNullException(nameof(consoleOptions));
 
             builder.Services
-                .AddSingleton<IConsoleOptions>(fluentdOptions);
+                .AddSingleton<IConsoleOptions>(consoleOptions);
 
             return builder.AddConsoleLogger(builder.Services);
         }

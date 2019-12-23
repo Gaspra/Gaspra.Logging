@@ -5,7 +5,7 @@ namespace Gaspra.Logging.Builder
 {
     public static class FileHostBuilderExtensions
     {
-        public static ILoggingBuilder AddProviderFluentd(
+        public static ILoggingBuilder AddProviderFile(
             this ILoggingBuilder loggingBuilder)
         {
             loggingBuilder
