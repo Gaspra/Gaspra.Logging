@@ -18,12 +18,12 @@ namespace Gaspra.Logging.Provider.File.Extensions
 
         public static ILoggingBuilder AddFileLogger(
             this ILoggingBuilder builder,
-            Options fluentdOptions)
+            FileOptions fluentdOptions)
         {
             if (fluentdOptions == null) throw new ArgumentNullException(nameof(fluentdOptions));
 
             builder.Services
-                .AddSingleton<IOptions>(fluentdOptions);
+                .AddSingleton<IFileOptions>(fluentdOptions);
 
             return builder.AddFileLogger(builder.Services);
         }
@@ -36,29 +36,22 @@ namespace Gaspra.Logging.Provider.File.Extensions
             if (serviceCollection == null) throw new ArgumentNullException(nameof(serviceCollection));
 
             /*
-                Using the try add extension methods, add services
-                for the Fluentd logging. This allows for services
-                to be added earlier and not overwritten here (like
-                overriding the options).
+                Try add allows us to implement these services ahead of time falling back
+                to default implementations
             */
 
-            //serviceCollection
-            //    .AddServiceIfNotImplemented<ProviderFactory>(typeof(FileProviderFactory), ServiceLifetime.Singleton)
-            //    .AddServiceIfNotImplemented<IOptions>(typeof(Options), ServiceLifetime.Singleton)
-            //    .AddServiceIfNotImplemented<ProviderLogger>(typeof(FileLogger), ServiceLifetime.Transient);
+            serviceCollection
+                .TryAddSingleton<IFileProviderFactory, FileProviderFactory>();
 
-            //serviceCollection
-            //    .TryAddSingleton<ProviderClient, Client>();
+            serviceCollection
+                .TryAddSingleton<IFileOptions, FileOptions>();
 
-            //serviceCollection
-            //    .TryAddTransient<ProviderPacker, LogPacker>();
-
-            //serviceCollection
-            //    .TryAddTransient<IClientTimer, ClientTimer>();
+            serviceCollection
+                .TryAddTransient<IFileLogger, FileLogger>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            builder.AddProvider(serviceProvider.GetService<ProviderFactory>());
+            builder.AddProvider(serviceProvider.GetService<IFileProviderFactory>());
 
             return builder;
         }

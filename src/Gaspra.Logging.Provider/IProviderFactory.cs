@@ -2,7 +2,7 @@
 
 namespace Gaspra.Logging.Provider
 {
-    public interface ProviderFactory  : ILoggerProvider
+    public interface IProviderFactory  : ILoggerProvider
     {
     }
 }

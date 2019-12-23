@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Gaspra.Logging.Provider.File.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
@@ -7,15 +8,15 @@ using System.Linq;
 
 namespace Gaspra.Logging.Provider.File
 {
-    public class FileProviderFactory : ProviderFactory
+    public class FileProviderFactory : IFileProviderFactory
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly ConcurrentDictionary<string, ProviderLogger> loggers;
+        private readonly ConcurrentDictionary<string, IProviderLogger> loggers;
 
         public FileProviderFactory(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            loggers = new ConcurrentDictionary<string, ProviderLogger>();
+            loggers = new ConcurrentDictionary<string, IProviderLogger>();
         }
 
         /*
@@ -30,19 +31,14 @@ namespace Gaspra.Logging.Provider.File
             return logger;
         }
 
-        private ProviderLogger GetLoggerService(string name)
+        private IFileLogger GetLoggerService(string name)
         {
-            var loggers = serviceProvider.GetServices<ProviderLogger>();
-
-            var logger = loggers
-                .Where(l => l
-                    .GetType()
-                    .Equals(typeof(FileLogger)))
-                .FirstOrDefault();
+            var logger = serviceProvider.GetService<IFileLogger>();
 
             if (logger == null)
             {
-                throw new NullReferenceException($"Unable to get logger with type {typeof(FileLogger)}, ensure provider is registered.");
+                throw new NullReferenceException(
+                    $"Unable to get logger with type {nameof(IFileLogger)}, ensure provider is registered.");
             }
 
             logger.Name = name;

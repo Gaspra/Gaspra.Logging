@@ -12,13 +12,13 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class LogPacker : ProviderPacker
+    public class FluentdLogPacker : IProviderPacker
     {
         private TcpClient tcpClient;
         private readonly SerializationContext serializationContext;
-        private readonly IOptions options;
+        private readonly IFluentdOptions options;
 
-        public LogPacker(IOptions options)
+        public FluentdLogPacker(IFluentdOptions options)
         {
             this.options = options;
 
@@ -89,7 +89,7 @@ namespace Gaspra.Logging.Provider.Fluentd
             }
             catch (Exception ex)
             {
-                ConsoleColor.Red.OutputMessage($"{typeof(LogPacker).FullName} {nameof(Connect)} -> failed due to: {ex.Message} {Environment.NewLine} {ex.StackTrace}"
+                ConsoleColor.Red.OutputMessage($"{typeof(FluentdLogPacker).FullName} {nameof(Connect)} -> failed due to: {ex.Message} {Environment.NewLine} {ex.StackTrace}"
                     , debug: options.Debug.On
                     , path: options.Debug.Path);
 

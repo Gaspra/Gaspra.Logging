@@ -3,7 +3,7 @@ using System;
 
 namespace Gaspra.Logging.Provider
 {
-    public interface ProviderLogger : ILogger, IDisposable
+    public interface IProviderLogger : ILogger, IDisposable
     {
         string Name { get; set; }
     }

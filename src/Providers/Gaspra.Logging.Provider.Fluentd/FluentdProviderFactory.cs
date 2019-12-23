@@ -6,15 +6,15 @@ using System.Collections.Concurrent;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdProviderFactory : ProviderFactory
+    public class FluentdProviderFactory : IProviderFactory
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly ConcurrentDictionary<string, ProviderLogger> loggers;
+        private readonly ConcurrentDictionary<string, IProviderLogger> loggers;
 
         public FluentdProviderFactory(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            loggers = new ConcurrentDictionary<string, ProviderLogger>();
+            loggers = new ConcurrentDictionary<string, IProviderLogger>();
         }
 
         /*
@@ -29,9 +29,9 @@ namespace Gaspra.Logging.Provider.Fluentd
             return logger;
         }
 
-        private ProviderLogger GetLoggerService(string name)
+        private IProviderLogger GetLoggerService(string name)
         {
-            var logger = (ProviderLogger)serviceProvider
+            var logger = (IProviderLogger)serviceProvider
                 .GetRequiredService(typeof(FluentdLogger));
 
             logger.Name = name;

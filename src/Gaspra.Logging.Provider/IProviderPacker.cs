@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Gaspra.Logging.Provider
 {
-    public interface ProviderPacker : IDisposable
+    public interface IProviderPacker : IDisposable
     {
         Task SendBatch(IEnumerable<(IDictionary<string, object> log, DateTimeOffset timestamp)> logEvents);
     }

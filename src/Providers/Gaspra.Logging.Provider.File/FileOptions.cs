@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Gaspra.Logging.Provider.File
 {
-    public class Options : IOptions
+    public class FileOptions : IFileOptions
     {
     }
 }

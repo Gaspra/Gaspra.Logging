@@ -10,21 +10,21 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class Client : ProviderClient
+    public class FluentdClient : IProviderClient
     {
-        private readonly ProviderPacker packer;
-        private readonly IOptions options;
-        private readonly IClientTimer timer;
+        private readonly IProviderPacker packer;
+        private readonly IFluentdOptions options;
+        private readonly IFluentdClientTimer timer;
         private readonly object syncObj;
         private ICollection<FluentdLog> sendBatch;
         private ICollection<FluentdLog> logEvents;
         private TimeSpan quietTime;
         private bool connected = false;
 
-        public Client(
-            ProviderPacker packer,
-            IOptions options,
-            IClientTimer timer)
+        public FluentdClient(
+            IProviderPacker packer,
+            IFluentdOptions options,
+            IFluentdClientTimer timer)
         {
             this.packer = packer;
             this.options = options;
@@ -49,7 +49,7 @@ namespace Gaspra.Logging.Provider.Fluentd
 
                         if (quietTime >= options.DisconnectTime)
                         {
-                            ConsoleColor.Yellow.OutputMessage($"{typeof(Client).FullName} {nameof(timer)} -> No logs for: {quietTime} disposing client. On thread with id `{Thread.CurrentThread.ManagedThreadId}`"
+                            ConsoleColor.Yellow.OutputMessage($"{typeof(FluentdClient).FullName} {nameof(timer)} -> No logs for: {quietTime} disposing client. On thread with id `{Thread.CurrentThread.ManagedThreadId}`"
                                 , debug: options.Debug.On
                                 , path: options.Debug.Path);
 
@@ -124,7 +124,7 @@ namespace Gaspra.Logging.Provider.Fluentd
                     }
                     catch (Exception ex)
                     {
-                        ConsoleColor.Red.OutputMessage($"{typeof(Client).FullName} {nameof(FlushEvents)} -> Failed sending the batch of logs due to (logs will be put back on queue): {ex.Message} {Environment.NewLine} {ex.StackTrace}"
+                        ConsoleColor.Red.OutputMessage($"{typeof(FluentdClient).FullName} {nameof(FlushEvents)} -> Failed sending the batch of logs due to (logs will be put back on queue): {ex.Message} {Environment.NewLine} {ex.StackTrace}"
                             , debug: options.Debug.On
                             , path: options.Debug.Path);
 
@@ -135,7 +135,7 @@ namespace Gaspra.Logging.Provider.Fluentd
                     }
                     finally
                     {
-                        ConsoleColor.White.OutputMessage($"{typeof(Client).FullName} {nameof(FlushEvents)} -> Clearing sendBatch: {sendBatch.Count()} in sendBatch, and {logEvents.Count()} in logEvents still to deliver"
+                        ConsoleColor.White.OutputMessage($"{typeof(FluentdClient).FullName} {nameof(FlushEvents)} -> Clearing sendBatch: {sendBatch.Count()} in sendBatch, and {logEvents.Count()} in logEvents still to deliver"
                             , debug: options.Debug.On
                             , path: options.Debug.Path);
 

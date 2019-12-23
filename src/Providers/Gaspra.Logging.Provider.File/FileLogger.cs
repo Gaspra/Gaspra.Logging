@@ -1,19 +1,15 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Gaspra.Logging.Provider.File.Interfaces;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Gaspra.Logging.Provider.File
 {
-    public class FileLogger : ProviderLogger
+    public class FileLogger : IFileLogger
     {
         public string Name { get; set; }
 
-        /*
-            Refrain from using this, to supress log events use the
-            `.AddConfiguration(configuration.GetSection("Logging"))`
-            built in log supression set up when configuring the logging
-        */
         public bool IsEnabled(LogLevel logLevel) => true;
 
         public IDisposable BeginScope<TState>(TState state)
@@ -28,17 +24,9 @@ namespace Gaspra.Logging.Provider.File
                 return;
             }
 
-            /*
-                Determine the appropriate serializer to use for this log event,
-                GetAppropriateSerializer will return the FirstOrDefault serializer
-                that determines this event as IsSerializiable.
-
-                Once determined the event is serialized to a Dictionary<string, object>
-                and sent with a timestamp.
-            */
             try
             {
-                System.Console.WriteLine($"{nameof(FileLogger)} - {Name} - {logLevel} - {formatter(state, exception)}");
+                Console.WriteLine($"{nameof(FileLogger)} - {Name} - {logLevel} - {formatter(state, exception)}");
             }
             catch (Exception ex)
             {
@@ -48,7 +36,7 @@ namespace Gaspra.Logging.Provider.File
 
         public void Dispose()
         {
-            //client.Dispose();
+
         }
     }
 }

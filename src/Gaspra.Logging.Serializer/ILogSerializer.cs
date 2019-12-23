@@ -7,14 +7,6 @@ namespace Gaspra.Logging.Serializer
     public interface ILogSerializer
     {
         /// <summary>
-        /// Determines whether the log serializer is appropriate for the provider
-        /// </summary>
-        /// <param name="providerName"></param>
-        /// <returns></returns>
-        bool IsProviderAppropriate
-            (string providerName);
-
-        /// <summary>
         /// Determines whether this serializer can serialize the log event.
         /// Log serializer could contextually only be correct for certain
         /// log levels, or it could depend on the objects in the state/ exception.

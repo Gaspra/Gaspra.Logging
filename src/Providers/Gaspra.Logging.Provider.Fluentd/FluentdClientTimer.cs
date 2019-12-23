@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class ClientTimer : IClientTimer
+    public class FluentdClientTimer : IFluentdClientTimer
     {
         private Timer timer;
 

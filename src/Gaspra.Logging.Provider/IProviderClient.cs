@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Gaspra.Logging.Provider
 {
-    public interface ProviderClient : IDisposable
+    public interface IProviderClient : IDisposable
     {
         Task Send(IDictionary<string, object> log, DateTimeOffset timestamp);
         Task FlushEvents();

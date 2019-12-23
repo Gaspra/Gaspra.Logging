@@ -65,7 +65,7 @@ namespace Gaspra.Logging.Builder
 
         public static ILoggingBuilder AddProviderFluentdWithDefaults(
             this ILoggingBuilder loggingBuilder,
-            Options fluentdOptions)
+            FluentdOptions fluentdOptions)
         {
             loggingBuilder
                 .Services

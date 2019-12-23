@@ -9,12 +9,12 @@ namespace Gaspra.Logging.Provider.Console
     public class ConsoleProviderFactory : IConsoleProviderFactory
     {
         private readonly IServiceProvider serviceProvider;
-        private readonly ConcurrentDictionary<string, ProviderLogger> loggers;
+        private readonly ConcurrentDictionary<string, IProviderLogger> loggers;
 
         public ConsoleProviderFactory(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
-            loggers = new ConcurrentDictionary<string, ProviderLogger>();
+            loggers = new ConcurrentDictionary<string, IProviderLogger>();
         }
 
         /*

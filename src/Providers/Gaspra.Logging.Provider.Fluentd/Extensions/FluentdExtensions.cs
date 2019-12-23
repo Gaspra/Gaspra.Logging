@@ -16,12 +16,12 @@ namespace Gaspra.Logging.Provider.Fluentd.Extensions
 
         public static ILoggingBuilder AddFluentd(
             this ILoggingBuilder builder,
-            Options fluentdOptions)
+            FluentdOptions fluentdOptions)
         {
             if (fluentdOptions == null) throw new ArgumentNullException(nameof(fluentdOptions));
 
             builder.Services
-                .AddSingleton<IOptions>(fluentdOptions);
+                .AddSingleton<IFluentdOptions>(fluentdOptions);
 
             return builder.AddFluentd(builder.Services);
         }
@@ -41,26 +41,26 @@ namespace Gaspra.Logging.Provider.Fluentd.Extensions
             */
 
             serviceCollection
-                .TryAddSingleton<ProviderFactory, FluentdProviderFactory>();
+                .TryAddSingleton<IProviderFactory, FluentdProviderFactory>();
 
             serviceCollection
-                .TryAddSingleton<IOptions, Options>();
+                .TryAddSingleton<IFluentdOptions, FluentdOptions>();
 
             serviceCollection
-                .TryAddSingleton<ProviderClient, Client>();
+                .TryAddSingleton<IProviderClient, FluentdClient>();
 
             serviceCollection
-                .TryAddTransient<ProviderLogger, FluentdLogger>();
+                .TryAddTransient<IProviderLogger, FluentdLogger>();
 
             serviceCollection
-                .TryAddTransient<ProviderPacker, LogPacker>();
+                .TryAddTransient<IProviderPacker, FluentdLogPacker>();
 
             serviceCollection
-                .TryAddTransient<IClientTimer, ClientTimer>();
+                .TryAddTransient<IFluentdClientTimer, FluentdClientTimer>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            builder.AddProvider(serviceProvider.GetService<ProviderFactory>());
+            builder.AddProvider(serviceProvider.GetService<IProviderFactory>());
 
             return builder;
         }

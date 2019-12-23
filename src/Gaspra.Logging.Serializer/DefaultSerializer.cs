@@ -32,11 +32,6 @@ namespace Gaspra.Logging.Serializer
             (LogLevel logLevel, TState state, Exception exception)
                 => true;
 
-        public bool IsProviderAppropriate(string providerName)
-        {
-            return true;
-        }
-
         public (IDictionary<string, object> serializedLog, DateTimeOffset timestamp) Serialize<TState>(string loggerName, LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             var Detail = new Dictionary<string, object>

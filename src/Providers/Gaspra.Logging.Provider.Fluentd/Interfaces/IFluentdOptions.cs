@@ -2,7 +2,7 @@
 
 namespace Gaspra.Logging.Provider.Fluentd.Interfaces
 {
-    public interface IOptions
+    public interface IFluentdOptions
     {
         string Host { get; set; }
         int Port { get; set; }

@@ -31,7 +31,7 @@ namespace test
                         logger
                             .ClearProviders()
                             .AddConsoleLogger()
-                            //.AddFileLogger()
+                            .AddFileLogger()
                             ;
                     });
 

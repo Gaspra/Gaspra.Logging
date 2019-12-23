@@ -8,13 +8,13 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdLogger : ProviderLogger
+    public class FluentdLogger : IProviderLogger
     {
         private readonly IEnumerable<ILogSerializer> serializers;
-        private readonly ProviderClient client;
-        private readonly IOptions options;
+        private readonly IProviderClient client;
+        private readonly IFluentdOptions options;
 
-        public FluentdLogger(IEnumerable<ILogSerializer> serializers, ProviderClient client, IOptions options)
+        public FluentdLogger(IEnumerable<ILogSerializer> serializers, IProviderClient client, IFluentdOptions options)
         {
             this.serializers = serializers;
             this.client = client;

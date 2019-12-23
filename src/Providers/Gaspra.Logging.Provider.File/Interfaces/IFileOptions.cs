@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Gaspra.Logging.Provider.File.Interfaces
 {
-    public interface IOptions
+    public interface IFileOptions
     {
     }
 }

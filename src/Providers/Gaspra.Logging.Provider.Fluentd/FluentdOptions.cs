@@ -6,11 +6,11 @@ using System.Net.Sockets;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class Options : IOptions
+    public class FluentdOptions : IFluentdOptions
     {
         private static string FluentdSectionName => "Logging:Providers:Fluentd";
 
-        public Options(IConfiguration configuration)
+        public FluentdOptions(IConfiguration configuration)
         {
             var fluentdConfig = configuration.GetSection(FluentdSectionName);
 
@@ -37,7 +37,7 @@ namespace Gaspra.Logging.Provider.Fluentd
             Validate();
         }
 
-        public Options(string host, int port)
+        public FluentdOptions(string host, int port)
         {
             //Required fields
             Host = host;
@@ -71,7 +71,7 @@ namespace Gaspra.Logging.Provider.Fluentd
         {
             if (string.IsNullOrWhiteSpace(Host))
             {
-                throw new Exception($"{nameof(Options)}: Host can't be null or whitespace");
+                throw new Exception($"{nameof(FluentdOptions)}: Host can't be null or whitespace");
             }
 
             var client = new TcpClient();
@@ -82,7 +82,7 @@ namespace Gaspra.Logging.Provider.Fluentd
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(Options)}: Exception while connecting: {ex.Message}");
+                throw new Exception($"{nameof(FluentdOptions)}: Exception while connecting: {ex.Message}");
             }
             finally
             {
