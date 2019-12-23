@@ -20,6 +20,8 @@ the ability to use the dotnet core logging framework and control how logs and th
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj" />
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.Console\Gaspra.Logging.Provider.Console.csproj" />
+    <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.File\Gaspra.Logging.Provider.File.csproj" />
     <ProjectReference Include="..\Providers\Gaspra.Logging.Provider.Fluentd\Gaspra.Logging.Provider.Fluentd.csproj" />
   </ItemGroup>
   <ItemGroup>
