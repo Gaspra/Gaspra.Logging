@@ -6,15 +6,15 @@ using System;
 
 namespace Gaspra.Logging.Provider.Fluentd.Extensions
 {
-    public static class FluentdExtensions
+    public static class FluentdLoggerExtensions
     {
-        public static ILoggingBuilder AddFluentd(
+        public static ILoggingBuilder AddFluentdLogger(
             this ILoggingBuilder builder)
         {
-            return builder.AddFluentd(builder.Services);
+            return builder.AddFluentdLogger(builder.Services);
         }
 
-        public static ILoggingBuilder AddFluentd(
+        public static ILoggingBuilder AddFluentdLogger(
             this ILoggingBuilder builder,
             FluentdOptions fluentdOptions)
         {
@@ -23,10 +23,10 @@ namespace Gaspra.Logging.Provider.Fluentd.Extensions
             builder.Services
                 .AddSingleton<IFluentdOptions>(fluentdOptions);
 
-            return builder.AddFluentd(builder.Services);
+            return builder.AddFluentdLogger(builder.Services);
         }
 
-        private static ILoggingBuilder AddFluentd(
+        private static ILoggingBuilder AddFluentdLogger(
             this ILoggingBuilder builder,
             IServiceCollection serviceCollection)
         {
@@ -41,26 +41,26 @@ namespace Gaspra.Logging.Provider.Fluentd.Extensions
             */
 
             serviceCollection
-                .TryAddSingleton<IProviderFactory, FluentdProviderFactory>();
+                .TryAddSingleton<IFluentdProviderFactory, FluentdProviderFactory>();
 
             serviceCollection
                 .TryAddSingleton<IFluentdOptions, FluentdOptions>();
 
             serviceCollection
-                .TryAddSingleton<IProviderClient, FluentdClient>();
+                .TryAddSingleton<IFluentdClient, FluentdClient>();
 
             serviceCollection
-                .TryAddTransient<IProviderLogger, FluentdLogger>();
+                .TryAddTransient<IFluentdLogger, FluentdLogger>();
 
             serviceCollection
-                .TryAddTransient<IProviderPacker, FluentdLogPacker>();
+                .TryAddTransient<IFluentdPacker, FluentdPacker>();
 
             serviceCollection
                 .TryAddTransient<IFluentdClientTimer, FluentdClientTimer>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            builder.AddProvider(serviceProvider.GetService<IProviderFactory>());
+            builder.AddProvider(serviceProvider.GetService<IFluentdProviderFactory>());
 
             return builder;
         }

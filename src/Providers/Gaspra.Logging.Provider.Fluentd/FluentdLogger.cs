@@ -1,5 +1,4 @@
 ﻿using Gaspra.Logging.Provider.Fluentd.Interfaces;
-using Gaspra.Logging.Provider.Fluentd.Extensions;
 using Gaspra.Logging.Serializer;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,13 +7,13 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdLogger : IProviderLogger
+    public class FluentdLogger : IFluentdLogger
     {
         private readonly IEnumerable<ILogSerializer> serializers;
-        private readonly IProviderClient client;
+        private readonly IFluentdClient client;
         private readonly IFluentdOptions options;
 
-        public FluentdLogger(IEnumerable<ILogSerializer> serializers, IProviderClient client, IFluentdOptions options)
+        public FluentdLogger(IEnumerable<ILogSerializer> serializers, IFluentdClient client, IFluentdOptions options)
         {
             this.serializers = serializers;
             this.client = client;

@@ -15,7 +15,7 @@ namespace Gaspra.Logging.Builder
             this ILoggingBuilder loggingBuilder)
         {
             loggingBuilder
-                .AddFluentd();
+                .AddFluentdLogger();
 
             return loggingBuilder;
         }
@@ -29,7 +29,7 @@ namespace Gaspra.Logging.Builder
                     .AddSerializers(loggingSerializers);
 
             loggingBuilder
-                .AddFluentd();
+                .AddFluentdLogger();
 
             return loggingBuilder;
         }
@@ -44,7 +44,7 @@ namespace Gaspra.Logging.Builder
                     .AddSerializers(loggingSerializers);
 
             loggingBuilder
-                .AddFluentd();
+                .AddFluentdLogger();
 
             return loggingBuilder;
         }
@@ -58,7 +58,7 @@ namespace Gaspra.Logging.Builder
                     .AddDefaultLogSerializer();
 
             loggingBuilder
-                .AddFluentd();
+                .AddFluentdLogger();
 
             return loggingBuilder;
         }
@@ -73,7 +73,7 @@ namespace Gaspra.Logging.Builder
                     .AddDefaultLogSerializer();
 
             loggingBuilder
-                .AddFluentd(fluentdOptions);
+                .AddFluentdLogger(fluentdOptions);
 
             return loggingBuilder;
         }

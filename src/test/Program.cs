@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gaspra.Logging.Builder;
 using Gaspra.Logging.Provider.Console.Extensions;
 using Gaspra.Logging.Provider.File.Extensions;
+using Gaspra.Logging.Provider.Fluentd.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +30,17 @@ namespace test
                 {
                     webBuilder.ConfigureLogging(logger =>
                     {
+                        logger.Services
+                            .AddDefaultLogProperties()
+                            .AddDefaultLogSerializer();
+
                         logger
                             .ClearProviders()
                             .AddConsoleLogger()
                             .AddFileLogger()
+                            .AddFluentdLogger(new Gaspra.Logging.Provider.Fluentd.FluentdOptions("gaspra.co.uk", 9833)
+                            {
+                            })
                             ;
                     });
 

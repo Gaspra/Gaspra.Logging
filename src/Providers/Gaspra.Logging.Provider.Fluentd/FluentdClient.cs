@@ -10,19 +10,19 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdClient : IProviderClient
+    public class FluentdClient : IFluentdClient
     {
-        private readonly IProviderPacker packer;
+        private readonly IFluentdPacker packer;
         private readonly IFluentdOptions options;
         private readonly IFluentdClientTimer timer;
         private readonly object syncObj;
         private ICollection<FluentdLog> sendBatch;
-        private ICollection<FluentdLog> logEvents;
+        private IList<FluentdLog> logEvents;
         private TimeSpan quietTime;
         private bool connected = false;
 
         public FluentdClient(
-            IProviderPacker packer,
+            IFluentdPacker packer,
             IFluentdOptions options,
             IFluentdClientTimer timer)
         {

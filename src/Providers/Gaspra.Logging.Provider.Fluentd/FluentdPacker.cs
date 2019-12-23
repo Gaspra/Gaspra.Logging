@@ -12,13 +12,13 @@ using Gaspra.Logging.Provider.Extensions;
 
 namespace Gaspra.Logging.Provider.Fluentd
 {
-    public class FluentdLogPacker : IProviderPacker
+    public class FluentdPacker : IFluentdPacker
     {
         private TcpClient tcpClient;
         private readonly SerializationContext serializationContext;
         private readonly IFluentdOptions options;
 
-        public FluentdLogPacker(IFluentdOptions options)
+        public FluentdPacker(IFluentdOptions options)
         {
             this.options = options;
 
@@ -51,9 +51,7 @@ namespace Gaspra.Logging.Provider.Fluentd
                 {
                     var unixTimestamp = (ulong)timestamp.ToUnixTimeSeconds();
                     var hasTag = log.TryGetValue("tag", out var tag);
-
                     await packer.PackArrayHeaderAsync(3);
-
                     await packer.PackStringAsync(hasTag ? tag.ToString() : "", Encoding.UTF8);
                     await packer.PackAsync(unixTimestamp);
                     await packer.PackAsync(log, serializationContext);
@@ -89,7 +87,7 @@ namespace Gaspra.Logging.Provider.Fluentd
             }
             catch (Exception ex)
             {
-                ConsoleColor.Red.OutputMessage($"{typeof(FluentdLogPacker).FullName} {nameof(Connect)} -> failed due to: {ex.Message} {Environment.NewLine} {ex.StackTrace}"
+                ConsoleColor.Red.OutputMessage($"{typeof(FluentdPacker).FullName} {nameof(Connect)} -> failed due to: {ex.Message} {Environment.NewLine} {ex.StackTrace}"
                     , debug: options.Debug.On
                     , path: options.Debug.Path);
 
