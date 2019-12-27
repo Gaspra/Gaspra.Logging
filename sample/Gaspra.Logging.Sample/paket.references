@@ -1,0 +1,4 @@
+﻿Microsoft.Extensions.Hosting
+Microsoft.Extensions.Logging
+Microsoft.Extensions.Configuration
+Microsoft.Extensions.DependencyInjection

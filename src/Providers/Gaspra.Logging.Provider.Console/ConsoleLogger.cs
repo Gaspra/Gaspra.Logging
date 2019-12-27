@@ -25,9 +25,6 @@ namespace Gaspra.Logging.Provider.Console
 
         public string Name { get; set; }
 
-        /*
-
-        */
         public bool IsEnabled(LogLevel logLevel) => true;
 
         public IDisposable BeginScope<TState>(TState state)
@@ -42,9 +39,6 @@ namespace Gaspra.Logging.Provider.Console
                 return;
             }
 
-            /*
-
-            */
             try
             {
                 var logSerializer = serializers.GetAppropriateSerializer(logLevel, state, exception);
@@ -56,10 +50,10 @@ namespace Gaspra.Logging.Provider.Console
                 options.ConsoleFormat
                     .Replace("timestamp", timestamp.ToString("HH:mm:ss.fff"))
                     .Replace("level", logLevel.ShortString())
-                    .Replace("name", Name)
+                    .Replace("name", options.ShortLoggerName ? Name.Split(".").Last() : Name)
                     .OutputMessage(back, fore);
 
-                string.Join(serializedLog.Values.ToString(), ", ")
+                $" {string.Join(", ", serializedLog.Values)}"
                     .OutputMessage(lineEnding: true);
             }
             catch (Exception ex)

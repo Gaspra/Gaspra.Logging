@@ -9,6 +9,7 @@ namespace Gaspra.Logging.Provider.Console
     {
         public IEnumerable<Type> AppropriateSerializers { get; set; }
         public string ConsoleFormat { get; set; }
+        public bool ShortLoggerName { get; set; }
 
         public ConsoleOptions()
         {
@@ -17,7 +18,9 @@ namespace Gaspra.Logging.Provider.Console
                 typeof(ConsoleSerializer)
             };
 
-            ConsoleFormat = "[timestamp level name]: ";
+            ConsoleFormat = "[timestamp level name]:";
+
+            ShortLoggerName = true;
         }
     }
 }

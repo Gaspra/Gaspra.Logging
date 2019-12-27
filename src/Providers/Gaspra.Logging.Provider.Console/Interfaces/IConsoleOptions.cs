@@ -8,6 +8,7 @@ namespace Gaspra.Logging.Provider.Console.Interfaces
     {
         public IEnumerable<Type> AppropriateSerializers { get; set; }
         public string ConsoleFormat { get; set; }
+        public bool ShortLoggerName { get; set; }
 
     }
 }

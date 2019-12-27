@@ -10,7 +10,6 @@
     <PackageIconUrl />
     <NeutralLanguage>en-GB</NeutralLanguage>
   </PropertyGroup>
-  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
   <ItemGroup>
     <ProjectReference Include="..\..\Gaspra.Logging.Provider\Gaspra.Logging.Provider.csproj" />
     <ProjectReference Include="..\..\Gaspra.Logging.Serializer\Gaspra.Logging.Serializer.csproj" />
@@ -18,7 +17,9 @@
   <ItemGroup>
     <None Include="..\..\icon.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

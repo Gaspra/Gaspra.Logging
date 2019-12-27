@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Richard Lawrence</Authors>
@@ -10,16 +10,15 @@
     <PackageIconUrl />
     <NeutralLanguage>en-GB</NeutralLanguage>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\Gaspra.Logging.Provider\Gaspra.Logging.Provider.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Include="..\..\icon.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>
