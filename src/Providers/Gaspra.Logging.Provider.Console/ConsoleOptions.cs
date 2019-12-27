@@ -1,8 +1,7 @@
 ﻿using Gaspra.Logging.Provider.Console.Interfaces;
-using Gaspra.Logging.Serializer;
+using Gaspra.Logging.Provider.Console.Serializer;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gaspra.Logging.Provider.Console
 {
@@ -15,7 +14,7 @@ namespace Gaspra.Logging.Provider.Console
         {
             AppropriateSerializers = new List<Type>
             {
-                typeof(SimpleSerializer)
+                typeof(ConsoleSerializer)
             };
 
             ConsoleFormat = "[timestamp level name]: ";
