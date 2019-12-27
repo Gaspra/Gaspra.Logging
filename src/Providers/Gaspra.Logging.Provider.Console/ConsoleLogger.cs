@@ -4,19 +4,23 @@ using Gaspra.Logging.Provider.Extensions;
 using Gaspra.Logging.Serializer;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace Gaspra.Logging.Provider.Console
 {
     public class ConsoleLogger : IConsoleLogger
     {
-        private readonly IEnumerable<ILogSerializer> serializers;
         private readonly IConsoleOptions options;
+        private readonly IEnumerable<ILogSerializer> serializers;
 
-        public ConsoleLogger(IEnumerable<ILogSerializer> serializers, IConsoleOptions options)
+        public ConsoleLogger(IConsoleOptions options, IEnumerable<ILogSerializer> serializers)
         {
-            this.serializers = serializers;
             this.options = options;
+            this.serializers = serializers
+                .Where(s => options
+                    .AppropriateSerializers
+                    .Contains(s.GetType()));
         }
 
         public string Name { get; set; }
@@ -45,19 +49,18 @@ namespace Gaspra.Logging.Provider.Console
             {
                 var logSerializer = serializers.GetAppropriateSerializer(logLevel, state, exception);
 
-                if (logSerializer == null)
-                {
-                    //todo: how to deal with this for a console logger?
-                    return;
-                }
-
                 var (serializedLog, timestamp) = logSerializer.Serialize(Name, logLevel, eventId, state, exception, formatter);
 
                 var (back, fore) = logLevel.ConsoleColour();
 
-                $"[{timestamp.ToString("HH:mm:ss.fff")} {logLevel.ShortString()} {Name}]:".OutputMessage(back, fore);
+                options.ConsoleFormat
+                    .Replace("timestamp", timestamp.ToString("HH:mm:ss.fff"))
+                    .Replace("level", logLevel.ShortString())
+                    .Replace("name", Name)
+                    .OutputMessage(back, fore);
 
-                $" {string.Join(serializedLog.Values.ToString(), ", ")}".OutputMessage(lineEnding: true);
+                string.Join(serializedLog.Values.ToString(), ", ")
+                    .OutputMessage(lineEnding: true);
             }
             catch (Exception ex)
             {

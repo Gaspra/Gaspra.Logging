@@ -1,4 +1,6 @@
 ﻿using Gaspra.Logging.Provider.Console.Interfaces;
+using Gaspra.Logging.Provider.Console.Serializer;
+using Gaspra.Logging.Serializer.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
@@ -37,6 +39,9 @@ namespace Gaspra.Logging.Provider.Console.Extensions
                 Try add allows us to implement these services ahead of time falling back
                 to default implementations
             */
+
+            serviceCollection
+                .TryAddSerializer(typeof(ConsoleSerializer));
 
             serviceCollection
                 .TryAddSingleton<IConsoleProviderFactory, ConsoleProviderFactory>();

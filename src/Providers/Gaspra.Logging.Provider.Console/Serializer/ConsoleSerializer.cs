@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Gaspra.Logging.Serializer;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace Gaspra.Logging.Serializer
+namespace Gaspra.Logging.Provider.Console.Serializer
 {
-    public class SimpleSerializer : ILogSerializer
+    public class ConsoleSerializer : ILogSerializer
     {
         public object OrderByKey => 0;
 
@@ -20,5 +22,6 @@ namespace Gaspra.Logging.Serializer
 
             return (serializedLog, DateTimeOffset.UtcNow);
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,20 @@ namespace Gaspra.Logging.Serializer.Extensions
                     serializer,
                     lifetime));
             }
+
+            return services;
+        }
+
+        public static IServiceCollection TryAddSerializer(
+            this IServiceCollection services,
+            Type serializer,
+            ServiceLifetime lifetime = ServiceLifetime.Transient)
+        {
+            services
+                .TryAdd(new ServiceDescriptor(
+                    typeof(ILogSerializer),
+                    serializer,
+                    lifetime));
 
             return services;
         }

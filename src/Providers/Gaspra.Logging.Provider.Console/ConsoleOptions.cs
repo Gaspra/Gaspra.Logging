@@ -18,7 +18,7 @@ namespace Gaspra.Logging.Provider.Console
                 typeof(SimpleSerializer)
             };
 
-            ConsoleFormat = "[{timestamp} {level}][{name}]: {message}";
+            ConsoleFormat = "[timestamp level name]: ";
         }
     }
 }
