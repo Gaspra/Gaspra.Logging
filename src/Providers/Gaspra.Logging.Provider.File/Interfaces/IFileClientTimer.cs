@@ -4,7 +4,5 @@ using System.Text;
 
 namespace Gaspra.Logging.Provider.File.Interfaces
 {
-    public interface IFileOptions
-    {
-    }
+    public interface IFileClientTimer : IProviderClientTimer { }
 }

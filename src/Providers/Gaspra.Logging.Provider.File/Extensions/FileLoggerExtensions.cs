@@ -18,12 +18,12 @@ namespace Gaspra.Logging.Provider.File.Extensions
 
         public static ILoggingBuilder AddFileLogger(
             this ILoggingBuilder builder,
-            FileOptions fluentdOptions)
+            FileProviderOptions fileOptions)
         {
-            if (fluentdOptions == null) throw new ArgumentNullException(nameof(fluentdOptions));
+            if (fileOptions == null) throw new ArgumentNullException(nameof(fileOptions));
 
             builder.Services
-                .AddSingleton<IFileOptions>(fluentdOptions);
+                .AddSingleton<IFileProviderOptions>(fileOptions);
 
             return builder.AddFileLogger(builder.Services);
         }
@@ -44,10 +44,19 @@ namespace Gaspra.Logging.Provider.File.Extensions
                 .TryAddSingleton<IFileProviderFactory, FileProviderFactory>();
 
             serviceCollection
-                .TryAddSingleton<IFileOptions, FileOptions>();
+                .TryAddSingleton<IFileProviderOptions, FileProviderOptions>();
+
+            serviceCollection
+                .TryAddSingleton<IFileClientTimer, FileClientTimer>();
+
+            serviceCollection
+                .TryAddSingleton<IFileClient, FileClient>();
 
             serviceCollection
                 .TryAddTransient<IFileLogger, FileLogger>();
+
+            serviceCollection
+                .TryAddSingleton<IFilePacker, FilePacker>();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
 

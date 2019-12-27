@@ -11,10 +11,10 @@ namespace Gaspra.Logging.Provider.Console
 {
     public class ConsoleLogger : IConsoleLogger
     {
-        private readonly IConsoleOptions options;
+        private readonly IConsoleProviderOptions options;
         private readonly IEnumerable<ILogSerializer> serializers;
 
-        public ConsoleLogger(IConsoleOptions options, IEnumerable<ILogSerializer> serializers)
+        public ConsoleLogger(IConsoleProviderOptions options, IEnumerable<ILogSerializer> serializers)
         {
             this.options = options;
             this.serializers = serializers

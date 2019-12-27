@@ -1,4 +1,5 @@
-﻿using Gaspra.Logging.Provider.File.Extensions;
+﻿using Gaspra.Logging.Provider.File;
+using Gaspra.Logging.Provider.File.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Gaspra.Logging.Builder
@@ -10,6 +11,16 @@ namespace Gaspra.Logging.Builder
         {
             loggingBuilder
                 .AddFileLogger();
+
+            return loggingBuilder;
+        }
+
+        public static ILoggingBuilder AddProviderFileWithOptions(
+            this ILoggingBuilder loggingBuilder,
+            FileProviderOptions fileOptions)
+        {
+            loggingBuilder
+                .AddFileLogger(fileOptions);
 
             return loggingBuilder;
         }

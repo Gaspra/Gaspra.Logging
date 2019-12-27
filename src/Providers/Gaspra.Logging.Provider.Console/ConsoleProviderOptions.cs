@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Gaspra.Logging.Provider.Console
 {
-    public class ConsoleOptions : IConsoleOptions
+    public class ConsoleProviderOptions : IConsoleProviderOptions
     {
         public IEnumerable<Type> AppropriateSerializers { get; set; }
         public string ConsoleFormat { get; set; }
         public bool ShortLoggerName { get; set; }
 
-        public ConsoleOptions()
+        public ConsoleProviderOptions()
         {
             AppropriateSerializers = new List<Type>
             {

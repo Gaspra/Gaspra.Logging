@@ -18,12 +18,12 @@ namespace Gaspra.Logging.Provider.Console.Extensions
 
         public static ILoggingBuilder AddConsoleLogger(
             this ILoggingBuilder builder,
-            ConsoleOptions consoleOptions)
+            ConsoleProviderOptions consoleOptions)
         {
             if (consoleOptions == null) throw new ArgumentNullException(nameof(consoleOptions));
 
             builder.Services
-                .AddSingleton<IConsoleOptions>(consoleOptions);
+                .AddSingleton<IConsoleProviderOptions>(consoleOptions);
 
             return builder.AddConsoleLogger(builder.Services);
         }
@@ -47,7 +47,7 @@ namespace Gaspra.Logging.Provider.Console.Extensions
                 .TryAddSingleton<IConsoleProviderFactory, ConsoleProviderFactory>();
 
             serviceCollection
-                .TryAddSingleton<IConsoleOptions, ConsoleOptions>();
+                .TryAddSingleton<IConsoleProviderOptions, ConsoleProviderOptions>();
 
             serviceCollection
                 .TryAddTransient<IConsoleLogger, ConsoleLogger>();
