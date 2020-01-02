@@ -41,7 +41,7 @@ namespace Gaspra.Logging.Provider.Console.Extensions
             */
 
             serviceCollection
-                .TryAddSerializer(typeof(ConsoleSerializer));
+                .AddSingleton<IConsoleLogSerializer, ConsoleSerializer>();
 
             serviceCollection
                 .TryAddSingleton<IConsoleProviderFactory, ConsoleProviderFactory>();

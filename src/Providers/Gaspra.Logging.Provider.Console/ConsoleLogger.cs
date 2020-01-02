@@ -12,15 +12,12 @@ namespace Gaspra.Logging.Provider.Console
     public class ConsoleLogger : IConsoleLogger
     {
         private readonly IConsoleProviderOptions options;
-        private readonly IEnumerable<ILogSerializer> serializers;
+        private readonly IEnumerable<IConsoleLogSerializer> serializers;
 
-        public ConsoleLogger(IConsoleProviderOptions options, IEnumerable<ILogSerializer> serializers)
+        public ConsoleLogger(IConsoleProviderOptions options, IEnumerable<IConsoleLogSerializer> serializers)
         {
             this.options = options;
-            this.serializers = serializers
-                .Where(s => options
-                    .AppropriateSerializers
-                    .Contains(s.GetType()));
+            this.serializers = serializers;
         }
 
         public string Name { get; set; }

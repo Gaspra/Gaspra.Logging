@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Gaspra.Logging.Provider.File;
 using System.IO;
+using Gaspra.Logging.Sample.Interfaces;
+using Gaspra.Logging.Sample.Implementation;
 
 namespace Gaspra.Logging.Sample
 {
@@ -25,6 +27,11 @@ namespace Gaspra.Logging.Sample
             .ConfigureLogging((host, logger) =>
             {
                 logger
+                    .Services
+                        .AddDefaultLogProperties()
+                        .AddDefaultLogSerializer();
+
+                logger
                     .ClearProviders()
                     .SetMinimumLevel(LogLevel.Debug)
                     .AddProviderConsole()
@@ -33,6 +40,10 @@ namespace Gaspra.Logging.Sample
             .ConfigureServices((host, services) =>
             {
                 services
+                    .AddSingleton<ILoggerExample, LoggerA>()
+                    .AddSingleton<ILoggerExample, LoggerB>()
+                    .AddSingleton<ILoggerExample, LoggerC>()
+                    .AddSingleton<ILoggerExample, LoggerCDuplicate>()
                     .AddHostedService<LoggingSampleService>();
             });
     }

@@ -14,10 +14,8 @@ namespace Gaspra.Logging.Provider.File
         private readonly IFilePacker packer;
         private readonly IFileProviderOptions options;
         private readonly IFileClientTimer timer;
-        private readonly object syncObj;
-        private ICollection<SerializedLog> sendBatch;
         private IList<SerializedLog> logEvents;
-        private bool syncing = false;
+        private bool flushing = false;
 
         public FileClient(
             IFilePacker packer,
@@ -28,18 +26,19 @@ namespace Gaspra.Logging.Provider.File
             this.options = options;
             this.timer = timer;
 
-            syncObj = new object();
-
             this.timer.SetupTimer(new TimerCallback(async (target) =>
             {
-                if (logEvents != null && logEvents.Any())
+                if (!flushing)
                 {
-                    await FlushEvents();
+                    if (logEvents != null && logEvents.Any())
+                    {
+                        await FlushEvents();
+                    }
                 }
             }), options.FlushTime);
         }
 
-        public Task Send(IDictionary<string, object> log, DateTimeOffset timestamp)
+        public async Task Send(IDictionary<string, object> log, DateTimeOffset timestamp)
         {
             if (logEvents == null)
             {
@@ -50,72 +49,47 @@ namespace Gaspra.Logging.Provider.File
                 Add log to the logEvents collection, if the collection grows
                 past the FlushSize limit the flushTimer will be invoked
             */
-            var addLogTask = Task.Run(() =>
+
+            logEvents.Add(new SerializedLog(log, timestamp));
+
+            if (!flushing && logEvents.Count() > options.FlushSize)
             {
-                logEvents.Add(new SerializedLog(log, timestamp));
+                timer
+                    .UpdateInterval(options.FlushTime, false);
+            }
 
-                if (logEvents.Count() > options.FlushSize)
-                {
-                    timer
-                        .UpdateInterval(options.FlushTime, false);
-                }
-            });
-
-            return addLogTask;
         }
 
         public async Task FlushEvents()
         {
-            if (logEvents != null && logEvents.Any())
+            if(!flushing)
             {
-                lock (syncObj)
-                {
-                    /*
-                        Use a single thread to create a batch of log events
-                        to send to the packer
-                    */
-                    var batch = logEvents.ToList();
+                flushing = true;
 
-                    foreach (var log in batch)
+                var toSend = logEvents.Take(options.FlushSize);
+
+                try
+                {
+                    await packer
+                        .SendBatch(toSend
+                            .Select(l => (l.Log, l.Timestamp)));
+                }
+                catch (Exception ex)
+                {
+                    ConsoleColor.Red.OutputMessage($"{typeof(FileClient).FullName} {nameof(FlushEvents)} -> Failed sending the batch of logs due to: {ex.Message} {Environment.NewLine} {ex.StackTrace}");
+
+                    toSend = null;
+                }
+
+                if(toSend != null)
+                {
+                    foreach(var log in toSend)
                     {
                         logEvents.Remove(log);
                     }
-
-                    sendBatch = batch;
                 }
 
-                if (sendBatch != null && sendBatch.Any() && syncing == false)
-                {
-                    syncing = true;
-
-                    try
-                    {
-                        /*
-                            If the connection or log events send throws an exception
-                            the logs are put back on the logEvents collection
-                        */
-                        await packer.SendBatch(
-                            sendBatch.Select(f =>
-                            {
-                                return (f.Log, f.Timestamp);
-                            })
-                        );
-                    }
-                    catch (Exception ex)
-                    {
-                        ConsoleColor.Red.OutputMessage($"{typeof(FileClient).FullName} {nameof(FlushEvents)} -> Failed sending the batch of logs due to (logs will be put back on queue): {ex.Message} {Environment.NewLine} {ex.StackTrace}");
-
-                        foreach (var log in sendBatch)
-                        {
-                            logEvents.Add(log);
-                        }
-                    }
-                    finally
-                    {
-                        sendBatch.Clear();
-                        syncing = false;
-                    }
-                }
+                flushing = false;
             }
         }
 

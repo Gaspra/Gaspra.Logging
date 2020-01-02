@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Gaspra.Logging.Sample.Interfaces;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace Gaspra.Logging.Sample
 {
     public class LoggingSampleService : IHostedService
     {
-        private readonly ILogger logger;
+        private readonly IEnumerable<ILoggerExample> examples;
 
-        public LoggingSampleService(ILogger<LoggingSampleService> logger)
+        public LoggingSampleService(IEnumerable<ILoggerExample> examples)
         {
-            this.logger = logger;
+            this.examples = examples;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
@@ -33,19 +34,18 @@ namespace Gaspra.Logging.Sample
 
         public async Task<bool> RunToCompletion()
         {
-            Console.WriteLine("How many logs do you wish to be sent?");
+            Console.WriteLine("How many iterations of logs do you wish to be logged?");
 
             var logsToSendInput = Console.ReadLine();
 
             if(int.TryParse(logsToSendInput, out var logsToSend))
             {
-                for(int l = 0; l < logsToSend;)
+                for(int l = 0; l < logsToSend; l++)
                 {
-                    logger.LogDebug($"Logging a message #{l++}");
-                    logger.LogInformation($"Logging a message #{l++}");
-                    logger.LogWarning($"Logging a message #{l++}");
-                    logger.LogError($"Logging a message #{l++}");
-                    logger.LogCritical($"Logging a message #{l++}");
+                    foreach(var example in examples)
+                    {
+                        await example.DoLogs();
+                    }
                 }
             }
 

@@ -1,9 +1,9 @@
 ﻿using Gaspra.Logging.Provider.File.Interfaces;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Gaspra.Logging.Provider.File
@@ -11,26 +11,34 @@ namespace Gaspra.Logging.Provider.File
     public class FilePacker : IFilePacker
     {
         private readonly IFileProviderOptions options;
-
+        private readonly JsonSerializerSettings serializerSettings;
         private string CurrentFileName;
 
         public FilePacker(IFileProviderOptions options)
         {
             this.options = options;
+
+            this.serializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.None,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            };
         }
 
         public async Task SendBatch(IEnumerable<(IDictionary<string, object> log, DateTimeOffset timestamp)> logEvents)
         {
             if(logEvents.Any())
             {
+                var logList = logEvents.ToList();
+
                 var filePath = GetRollingFile();
 
                 //todo: improve this (should render all then write in one async, or create a list of tasks to wait for? {could risk logs not being in order})
                 var toWrite = "";
 
-                foreach(var (log, timestamp) in logEvents)
+                foreach(var (log, timestamp) in logList)
                 {
-                    toWrite += RenderedText(log, timestamp);
+                    toWrite += $"{Environment.NewLine}[{timestamp.ToString("y-MM-dd HH:mm:ss.ffffffK")}]: {DeserializeLogDictionary(log)}";
                 }
 
                 await System.IO.File.AppendAllTextAsync(filePath, toWrite);
@@ -40,18 +48,6 @@ namespace Gaspra.Logging.Provider.File
         public void Dispose()
         {
             throw new NotImplementedException();
-        }
-
-        private string RenderedText(IDictionary<string, object> log, DateTimeOffset timestamp)
-        {
-            var text = $"{Environment.NewLine}[{timestamp.ToString("y-MM-dd HH:mm:ss.ffffffK")}]: ";
-
-            foreach(var item in log)
-            {
-                text += $"{Environment.NewLine}{item.Key}: {item.Value}";
-            }
-
-            return text;
         }
 
         private string GetRollingFile()
@@ -87,6 +83,13 @@ namespace Gaspra.Logging.Provider.File
             }
 
             return false;
+        }
+
+        private string DeserializeLogDictionary(IDictionary<string, object> log)
+        {
+            var renderedDictionary = JsonConvert.SerializeObject(log, serializerSettings);
+
+            return renderedDictionary;
         }
     }
 }

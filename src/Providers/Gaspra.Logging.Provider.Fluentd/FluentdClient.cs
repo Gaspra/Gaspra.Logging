@@ -60,7 +60,7 @@ namespace Gaspra.Logging.Provider.Fluentd
             }), options.FlushTime);
         }
 
-        public Task Send(IDictionary<string, object> log, DateTimeOffset timestamp)
+        public async Task Send(IDictionary<string, object> log, DateTimeOffset timestamp)
         {
             if(logEvents == null)
             {
@@ -71,7 +71,7 @@ namespace Gaspra.Logging.Provider.Fluentd
                 Add log to the logEvents collection, if the collection grows
                 past the FlushSize limit the flushTimer will be invoked
             */
-            var addLogTask = Task.Run(() =>
+            await Task.Run(() =>
             {
                 logEvents.Add(new SerializedLog(log, timestamp));
 
@@ -81,8 +81,6 @@ namespace Gaspra.Logging.Provider.Fluentd
                         .UpdateInterval(options.FlushTime, false);
                 }
             });
-
-            return addLogTask;
         }
 
         public async Task FlushEvents()

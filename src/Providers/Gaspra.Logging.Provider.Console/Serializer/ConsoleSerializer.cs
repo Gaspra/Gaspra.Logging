@@ -1,12 +1,11 @@
-﻿using Gaspra.Logging.Serializer;
+﻿using Gaspra.Logging.Provider.Console.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Gaspra.Logging.Provider.Console.Serializer
 {
-    public class ConsoleSerializer : ILogSerializer
+    public class ConsoleSerializer : IConsoleLogSerializer
     {
         public object OrderByKey => 0;
 
