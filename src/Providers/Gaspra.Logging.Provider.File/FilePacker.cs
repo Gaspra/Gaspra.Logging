@@ -29,19 +29,23 @@ namespace Gaspra.Logging.Provider.File
         {
             if(logEvents.Any())
             {
-                var logList = logEvents.ToList();
-
                 var filePath = GetRollingFile();
 
                 //todo: improve this (should render all then write in one async, or create a list of tasks to wait for? {could risk logs not being in order})
-                var toWrite = "";
+                var toWrite = new List<string>();
 
-                foreach(var (log, timestamp) in logList)
+                toWrite = logEvents.Select(l =>
                 {
-                    toWrite += $"{Environment.NewLine}[{timestamp.ToString("y-MM-dd HH:mm:ss.ffffffK")}]: {DeserializeLogDictionary(log)}";
-                }
+                    if(l.log != null)
+                    {
+                        return $"[{l.timestamp.ToString("y-MM-dd HH:mm:ss.ffffffK")}]: {DeserializeLogDictionary(l.log)}";
+                    }
 
-                await System.IO.File.AppendAllTextAsync(filePath, toWrite);
+                    return "";
+
+                }).ToList();
+
+                await System.IO.File.AppendAllLinesAsync(filePath, toWrite.Where(t => !string.IsNullOrWhiteSpace(t)));
             }
         }
 

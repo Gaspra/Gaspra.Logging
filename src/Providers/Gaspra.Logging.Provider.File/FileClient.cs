@@ -49,15 +49,16 @@ namespace Gaspra.Logging.Provider.File
                 Add log to the logEvents collection, if the collection grows
                 past the FlushSize limit the flushTimer will be invoked
             */
-
-            logEvents.Add(new SerializedLog(log, timestamp));
-
-            if (!flushing && logEvents.Count() > options.FlushSize)
+            await Task.Run(() =>
             {
-                timer
-                    .UpdateInterval(options.FlushTime, false);
-            }
+                logEvents.Add(new SerializedLog(log, timestamp));
 
+                if (!flushing && logEvents.Count() > options.FlushSize)
+                {
+                    timer
+                        .UpdateInterval(options.FlushTime, false);
+                }
+            });
         }
 
         public async Task FlushEvents()
