@@ -1,0 +1,59 @@
+name: publish to nuget
+
+on:
+  push:
+    branches:
+      - master # Default release branch
+
+jobs:
+  publish:
+    name: build, pack & publish
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run & restore paket
+        run: build.ps1
+        shell: powershell
+
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_serializer
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Gaspra.Logging.Serializer/Gaspra.Logging.Serializer.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_builder
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Gaspra.Logging.Builder/Gaspra.Logging.Builder.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_provider
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Gaspra.Logging.Provider/Gaspra.Logging.Provider.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_provider_fluentd
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Providers/Gaspra.Logging.Provider.Fluentd/Gaspra.Logging.Provider.Fluentd.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_console
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Providers/Gaspra.Logging.Provider.Console/Gaspra.Logging.Provider.Console.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          
+      - name: Publish on version change
+        id: publish_nuget_gaspra_logging_file
+        uses: rohith/publish-nuget@v2
+        with:
+          PROJECT_FILE_PATH: src/Providers/Gaspra.Logging.Provider.File/Gaspra.Logging.Provider.File.csproj
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
