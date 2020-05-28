@@ -10,7 +10,7 @@ namespace Gaspra.Logging.Provider.Console
         public ConsoleProviderOptions()
         {
             //todo: put message into this, only colour in between the brackets
-            ConsoleFormat = "[timestamp level name]: ";
+            ConsoleFormat = "[timestamp level name]:";
 
             ShortLoggerName = true;
         }

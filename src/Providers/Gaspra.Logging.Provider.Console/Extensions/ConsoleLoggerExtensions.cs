@@ -1,6 +1,5 @@
 ﻿using Gaspra.Logging.Provider.Console.Interfaces;
 using Gaspra.Logging.Provider.Console.Serializer;
-using Gaspra.Logging.Serializer.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;

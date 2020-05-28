@@ -1,4 +1,5 @@
-﻿using Gaspra.Logging.Provider.Console.Extensions;
+﻿using Gaspra.Logging.Provider.Console;
+using Gaspra.Logging.Provider.Console.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace Gaspra.Logging.Builder
@@ -10,6 +11,16 @@ namespace Gaspra.Logging.Builder
         {
             loggingBuilder
                 .AddConsoleLogger();
+
+            return loggingBuilder;
+        }
+
+        public static ILoggingBuilder AddProviderConsoleWithOptions(
+            this ILoggingBuilder loggingBuilder,
+            ConsoleProviderOptions consoleOptions)
+        {
+            loggingBuilder
+                .AddConsoleLogger(consoleOptions);
 
             return loggingBuilder;
         }
