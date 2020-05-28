@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Authors>Richard Lawrence</Authors>
+    <Version>1.1.0</Version>
     <Company>Gaspra</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Gaspra/Gaspra.Logging</PackageProjectUrl>
